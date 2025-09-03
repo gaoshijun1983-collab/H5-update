@@ -392,7 +392,7 @@
     
     <!-- 地图页 -->
     <div id="mapPage" class="page full-height flex-col bg-gray-100">
-        <div class="relative w-full aspect-[4/3] sm:aspect-[2/1] bg-cover bg-center" style="background-image: url('https://raw.githubusercontent.com/gaoshijun1983-collab/Lilly-H5/main/WechatIMG1398.jpg');">
+        <div class="relative w-full aspect-[4/3] sm:aspect-[2/1] bg-cover bg-center" style="background-image: url('https://raw.githubusercontent.com/gaoshijun1983-collab/H5-update/main/Untitled-20250903-133831-2264-4x.jpg');">
              <div class="absolute top-4 left-4 p-3 bg-gradient-to-r from-white/90 to-white/70 backdrop-blur-sm rounded-xl shadow-lg text-gray-700 max-w-xs sm:max-w-sm flex items-center gap-3">
                  <div class="flex-shrink-0 bg-red-100 p-2 rounded-full">
                     <svg class="w-6 h-6 text-lilly-red" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
@@ -403,31 +403,31 @@
                  </div>
             </div>
             
-            <div data-action="showPage" data-page="badmintonIntroPage" class="map-hotspot" style="top: 65%; left: 15%; animation-delay: 0.2s; transform: scale(1.1);">
+            <div data-action="showPage" data-page="badmintonIntroPage" class="map-hotspot" style="top: 70%; left: 25%; animation-delay: 0.2s; transform: scale(1.1);">
                 <div class="map-icon" style="width: 50px; height: 50px; font-size: 28px; background-color: #ef4444;">🏸</div>
                 <div class="map-label" style="font-size: 14px; padding: 4px 12px;">「谁羽争锋」大赛</div>
             </div>
-            <div data-action="showHighlight" data-highlight="event" class="map-hotspot" style="top: 75%; left: 50%; transform: translateX(-50%);">
+            <div data-action="showHighlight" data-highlight="event" class="map-hotspot" style="top: 65%; left: 50%; transform: translateX(-50%);">
                 <div class="map-icon">💥</div>
                 <div class="map-label">尖叫搏击赛</div>
             </div>
-             <div data-action="showPage" data-page="craftsBookingPage" class="map-hotspot" style="top: 40%; left: 18%; animation-delay: 0.4s; transform: scale(1.1);">
+             <div data-action="showPage" data-page="craftsBookingPage" class="map-hotspot" style="top: 30%; left: 20%; animation-delay: 0.4s; transform: scale(1.1);">
                 <div class="map-icon" style="width: 50px; height: 50px; font-size: 28px; background-color: #a855f7;">🎨</div>
                 <div class="map-label" style="font-size: 14px; padding: 4px 12px;">慢时光工坊</div>
             </div>
-            <div data-action="showHighlight" data-highlight="offroad" class="map-hotspot" style="top: 20%; left: 80%; animation-delay: 0.3s;">
+            <div data-action="showHighlight" data-highlight="offroad" class="map-hotspot" style="top: 35%; left: 80%; animation-delay: 0.3s;">
                 <div class="map-icon">🚙</div>
                 <div class="map-label">越野车</div>
             </div>
-             <div data-action="showHighlight" data-highlight="picking" class="map-hotspot" style="top: 45%; left: 80%;">
+             <div data-action="showHighlight" data-highlight="picking" class="map-hotspot" style="top: 55%; left: 78%;">
                 <div class="map-icon">🧺</div>
-                <div class="map-label">采摘乐园</div>
+                <div class="map-label">野餐区</div>
             </div>
-            <div data-action="showHighlight" data-highlight="party" class="map-hotspot" style="top: 78%; left: 78%; animation-delay: 0.5s;">
+            <div data-action="showHighlight" data-highlight="party" class="map-hotspot" style="top: 80%; left: 80%; animation-delay: 0.5s;">
                 <div class="map-icon">🔥</div>
                 <div class="map-label">篝火派对</div>
             </div>
-            <div data-action="showHighlight" data-highlight="fireworks" class="map-hotspot" style="top: 73%; left: 85%;">
+            <div data-action="showHighlight" data-highlight="fireworks" class="map-hotspot" style="top: 70%; left: 88%;">
                  <div class="map-icon">🎆</div>
                  <div class="map-label">烟花秀</div>
             </div>
@@ -1096,8 +1096,7 @@
             const canvas = this.getEl('scratchCanvas');
             const ctx = canvas.getContext('2d');
             let isDrawing = false;
-            let hasMoved = false;
-
+        
             const getBrushPos = (x, y) => {
                 const rect = canvas.getBoundingClientRect();
                 return { x: x - rect.left, y: y - rect.top };
@@ -1105,7 +1104,6 @@
         
             const draw = (e) => {
                 if (!isDrawing) return;
-                hasMoved = true;
                 e.preventDefault();
                 const pos = e.touches ? getBrushPos(e.touches[0].clientX, e.touches[0].clientY) : getBrushPos(e.clientX, e.clientY);
                 ctx.lineTo(pos.x, pos.y);
@@ -1114,35 +1112,23 @@
         
             const start = (e) => {
                 isDrawing = true;
-                hasMoved = false;
                 const pos = e.touches ? getBrushPos(e.touches[0].clientX, e.touches[0].clientY) : getBrushPos(e.clientX, e.clientY);
                 ctx.beginPath();
                 ctx.moveTo(pos.x, pos.y);
             }
         
-            const finish = (e) => {
-                if (!isDrawing) return;
-                isDrawing = false;
-
-                // This logic is for click-through, not needed with the new approach
-                // but kept in case of future changes. A simple finish is enough for now.
-            }
+            const finish = () => { isDrawing = false; }
             
-            // New logic to handle both click and scratch
              const checkClickThrough = (e) => {
                 const clientX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
                 const clientY = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
                 
-                const pos = getBrushPos(clientX, clientY);
-                const pixelData = ctx.getImageData(pos.x, pos.y, 1, 1).data;
+                canvas.style.pointerEvents = 'none';
+                const underlyingElement = document.elementFromPoint(clientX, clientY);
+                canvas.style.pointerEvents = 'auto'; 
                 
-                if (pixelData[3] === 0) {
-                    canvas.style.pointerEvents = 'none';
-                    const underlyingElement = document.elementFromPoint(clientX, clientY);
-                    if (underlyingElement) {
-                        underlyingElement.click();
-                    }
-                    canvas.style.pointerEvents = 'auto'; 
+                if (underlyingElement && underlyingElement.closest('[data-action]')) {
+                   underlyingElement.closest('[data-action]').click();
                 }
             }
 
@@ -1164,11 +1150,14 @@
             canvas.addEventListener('mousedown', start);
             canvas.addEventListener('mousemove', draw);
             canvas.addEventListener('mouseup', finish);
-            canvas.addEventListener('click', checkClickThrough); // Use click for pass-through
+            canvas.addEventListener('click', checkClickThrough);
 
             canvas.addEventListener('touchstart', start, { passive: false });
             canvas.addEventListener('touchmove', draw, { passive: false });
-            canvas.addEventListener('touchend', finish);
+            canvas.addEventListener('touchend', (e) => {
+                finish();
+                checkClickThrough(e);
+            });
         }
         
         showItemDetail(target) {
